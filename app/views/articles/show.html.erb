@@ -1,7 +1,23 @@
-<h1>Showing Articles</h1>
-<p><strong>Title : </strong><%= @article.title %></p>
-<p><strong>Description : </strong><%= @article.description %></p>
-
-<%= link_to 'Edit',edit_article_path(@article) %>|
-<%= link_to 'delete',article_path(@article),data: {"turbo-method": :delete , "turbo-confirm": "Are you Sure?"} %>|
-<%= link_to 'article Listing Page',articles_path %>
+<h1 class="text-center"><%= @article.title %></h1>
+<br>
+<div class="container">
+<div class="row justify-content-md-center">
+ <div class="col-8 mt-4">
+  <div class="card text-center shadow mb-5 bg-body rounded">
+    <div class="card-header fst-italic">
+    By SparshGupta
+    </div>
+    <div class="card-body">
+    <div class="card-text text-start"><%= simple_format(@article.description) %></div>
+    <%= link_to "Edit",edit_article_path(@article),class: "btn btn-success" %>
+    <%= link_to 'delete',article_path(@article),class:"btn btn-danger",data: {"turbo-method": :delete , "turbo-confirm": "Are you Sure?"} %>
+    <%= link_to "All Articles",articles_path, class: "btn btn-primary" %>
+    <%= link_to 'Go to Home page',root_path, class: "btn btn-warning" %>
+    </div>
+    <div class="card-footer text-muted">
+    2 days ago
+    </div>
+  </div>
+ </div>
+</div>
+</div>
