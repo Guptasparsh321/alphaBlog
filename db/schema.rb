@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_22_060119) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_22_065349) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text "description"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
