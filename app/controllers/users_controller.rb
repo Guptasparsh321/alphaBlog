@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+    before_action  :require_user, only: [:edit,:update]
+    before_action :require_same_user, only: [:edit,:update,:destroy]
     
     def show
         @user=User.find(params[:id])
@@ -42,9 +45,25 @@ class UsersController < ApplicationController
 
     end
 
+    def destroy
+       @user=User.find(params[:id])
+       @user.destroy
+       session[:user_id] = nil if @user == current_user
+       flash[:notice]= "account and associations successfully deleted"
+       redirect_to root_path
+       
+    end
+
     private
 
     def user_params
         params.require(:user).permit(:username,:email, :password)
+    end
+
+    def require_same_user
+        if current_user != @user && !current_user.admin?
+            flash[:alert]="you can only edit or delete  your own profile"
+            redirect_to users_path
+        end
     end
 end
